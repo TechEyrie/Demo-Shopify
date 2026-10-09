@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+/* main.html is kept only as the porting reference. Without this, Tailwind's
+   source scanner walks it and emits every utility it used (bg-gradient-to-*,
+   outline variants, etc.) into the production bundle for nothing. */
+@source not "../main.html";
+
+/*
+ * Design tokens ported 1:1 from the `tailwind.config` block in main.html.
+ * Tailwind v4 is CSS-first, so the v3 theme.extend config becomes @theme vars.
+ *
+ * Dropped on purpose:
+ *  - fontFamily: all 15 keys mapped to "Plus Jakarta Sans" — one --font-sans covers them.
+ *  - borderRadius: v3 overrides (lg .5rem / xl .75rem / full 9999px) equal v4 defaults.
+ *  - darkMode: "class" — the markup never used a single dark: variant.
+ */
+@theme {
+  /* ---- colors ---- */
+  --color-secondary-fixed-dim: #bec6e0;
+  --color-surface-dim: #cbdbf5;
+  --color-on-secondary-fixed: #131b2e;
+  --color-error-container: #ffdad6;
+  --color-on-secondary-container: #5c647a;
+  --color-surface-container-low: #eff4ff;
+  --color-surface-container: #e5eeff;
+  --color-on-error: #ffffff;
+  --color-error: #ba1a1a;
+  --color-surface-subtle: #f8fafc;
+  --color-primary-fixed: #ffdad6;
+  --color-surface-bright: #f8f9ff;
+  --color-outline: #936e6a;
+  --color-on-primary-fixed: #410002;
+  --color-badge-sale: #eb1c24;
+  --color-on-tertiary: #ffffff;
+  --color-surface: #f8f9ff;
+  --color-surface-container-high: #dce9ff;
+  --color-text-primary: #0f172a;
+  --color-tertiary-fixed: #c4e7ff;
+  --color-primary-container: #e61721;
+  --color-surface-border: #e2e8f0;
+  --color-on-secondary: #ffffff;
+  --color-on-error-container: #93000a;
+  --color-secondary-container: #dae2fd;
+  --color-surface-tint: #c00014;
+  --color-inverse-on-surface: #eaf1ff;
+  --color-on-tertiary-container: #fcfcff;
+  --color-badge-filament: #0284c7;
+  --color-on-background: #0b1c30;
+  --color-inverse-primary: #ffb4ab;
+  --color-text-secondary: #334155;
+  --color-surface-container-lowest: #ffffff;
+  --color-on-secondary-fixed-variant: #3f465c;
+  --color-text-tertiary: #64748b;
+  --color-outline-variant: #e8bcb7;
+  --color-on-surface: #0b1c30;
+  --color-on-tertiary-fixed-variant: #004c69;
+  --color-tertiary-fixed-dim: #7bd0ff;
+  --color-on-surface-variant: #5e3f3c;
+  --color-primary: #bb0014;
+  --color-tertiary: #006387;
+  --color-on-primary: #ffffff;
+  --color-on-primary-fixed-variant: #93000d;
+  --color-on-tertiary-fixed: #001e2c;
+  --color-surface-container-highest: #d3e4fe;
+  --color-surface-muted: #f1f5f9;
+  --color-tertiary-container: #007da9;
+  --color-background: #f8f9ff;
+  --color-primary-fixed-dim: #ffb4ab;
+  --color-secondary-fixed: #dae2fd;
+  --color-surface-canvas: #ffffff;
+  --color-surface-variant: #d3e4fe;
+  --color-secondary: #565e74;
+  --color-on-primary-container: #fffbff;
+  --color-inverse-surface: #213145;
+
+  /* ---- named spacing ---- */
+  --spacing-space-xs: 0.25rem;
+  --spacing-space-sm: 0.5rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-lg: 1.5rem;
+  --spacing-space-xl: 2.5rem;
+  --spacing-space-2xl: 4rem;
+  --spacing-space-3xl: 6rem;
+  --spacing-gutter-mobile: 1rem;
+  --spacing-margin-mobile: 1rem;
+  --spacing-gutter: 1.5rem;
+  --spacing-margin: 2rem;
+  --spacing-margin-desktop-max: 5rem;
+
+  /* ---- type scale (size / line-height / letter-spacing / weight) ---- */
+  --text-display-hero-mobile: 36px;
+  --text-display-hero-mobile--line-height: 44px;
+  --text-display-hero-mobile--letter-spacing: -0.025em;
+  --text-display-hero-mobile--font-weight: 800;
+
+  --text-display-hero: 56px;
+  --text-display-hero--line-height: 64px;
+  --text-display-hero--letter-spacing: -0.03em;
+  --text-display-hero--font-weight: 800;
+
+  --text-headline-xl-mobile: 28px;
+  --text-headline-xl-mobile--line-height: 36px;
+  --text-headline-xl-mobile--letter-spacing: -0.015em;
+  --text-headline-xl-mobile--font-weight: 700;
+
+  --text-headline-xl: 40px;
+  --text-headline-xl--line-height: 48px;
+  --text-headline-xl--letter-spacing: -0.02em;
+  --text-headline-xl--font-weight: 700;
+
+  --text-headline-lg: 32px;
+  --text-headline-lg--line-height: 40px;
+  --text-headline-lg--letter-spacing: -0.015em;
+  --text-headline-lg--font-weight: 700;
+
+  --text-headline-lg-mobile: 24px;
+  --text-headline-lg-mobile--line-height: 32px;
+  --text-headline-lg-mobile--letter-spacing: -0.01em;
+  --text-headline-lg-mobile--font-weight: 700;
+
+  --text-headline-md: 24px;
+  --text-headline-md--line-height: 32px;
+  --text-headline-md--letter-spacing: -0.01em;
+  --text-headline-md--font-weight: 600;
+
+  --text-headline-sm: 20px;
+  --text-headline-sm--line-height: 28px;
+  --text-headline-sm--letter-spacing: -0.005em;
+  --text-headline-sm--font-weight: 600;
+
+  --text-title-md: 18px;
+  --text-title-md--line-height: 24px;
+  --text-title-md--font-weight: 600;
+
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 28px;
+  --text-body-lg--font-weight: 400;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 24px;
+  --text-body-md--font-weight: 400;
+
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 20px;
+  --text-body-sm--font-weight: 400;
+
+  --text-label-lg: 14px;
+  --text-label-lg--line-height: 20px;
+  --text-label-lg--letter-spacing: 0.01em;
+  --text-label-lg--font-weight: 600;
+
+  --text-label-md: 12px;
+  --text-label-md--line-height: 16px;
+  --text-label-md--letter-spacing: 0.02em;
+  --text-label-md--font-weight: 600;
+
+  --text-label-sm: 11px;
+  --text-label-sm--line-height: 14px;
+  --text-label-sm--letter-spacing: 0.04em;
+  --text-label-sm--font-weight: 700;
+}
+
+/* `inline` because the value is another custom property, set by next/font. */
+@theme inline {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    overscroll-behavior: none;
+  }
+}
+
+/* The original hid the scrollbar globally to match the shell it was exported from. */
+::-webkit-scrollbar {
+  display: none;
+}
